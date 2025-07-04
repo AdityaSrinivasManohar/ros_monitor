@@ -1,12 +1,15 @@
 """ROS 2 TUI."""
-import rclpy
-from rclpy.node import Node
+
 import threading
 import time
 
+import rclpy
+from rclpy.node import Node
+
+
 class Ros2Monitor(Node):
     def __init__(self):
-        super().__init__('ros2monitor')
+        super().__init__("ros2monitor")
         self.topics_and_types = {}
         self._stop_event = threading.Event()
         self._thread = threading.Thread(target=self._update_topics_loop, daemon=True)
@@ -35,16 +38,18 @@ class Ros2Monitor(Node):
     def echo_topic(self, topic_name, msg_type):
         # Subscribe to the given topic and print messages
         def callback(msg):
-            self.get_logger().info(f'Received: {msg}')
+            self.get_logger().info(f"Received: {msg}")
+
         self.create_subscription(msg_type, topic_name, callback, 10)
-        self.get_logger().info(f'Subscribed to {topic_name} (type: {msg_type.__name__})')
+        self.get_logger().info(f"Subscribed to {topic_name} (type: {msg_type.__name__})")
         rclpy.spin(self)
 
     def print_topics(self):
         # self.get_logger().info('Current topics:')
         for topic, topic_type in self.topics_and_types.items():
             # self.get_logger().info(f'Topic: {topic}, Type: {type}')
-            print(f'Topic: {topic}, Type: {topic_type}')
+            print(f"Topic: {topic}, Type: {topic_type}")
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -63,6 +68,7 @@ def main(args=None):
         ros2monitor.stop()
         ros2monitor.destroy_node()
         rclpy.shutdown()
+
 
 if __name__ == "__main__":
     print("ROS 2 TUI Example")

@@ -1,0 +1,4 @@
+textual
+pyyaml
+numpy
+ruff
