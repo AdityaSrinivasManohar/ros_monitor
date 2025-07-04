@@ -7,7 +7,8 @@ from ros_utils import Ros2Monitor
 import rclpy
 import threading
 import time
-from logging_config import logger
+from utils.logging_config import logger
+from utils.version import get_version
 from widgets.topic_table import TopicTable
 
 BINDINGS = [
@@ -22,6 +23,7 @@ class Ros2MonitorApp(App):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.ros_monitor = None
+        self.version = get_version()
         logger.info("Ros2MonitorApp started.")
 
     def compose(self) -> ComposeResult:
@@ -31,6 +33,8 @@ class Ros2MonitorApp(App):
         yield Footer()
 
     def on_mount(self):
+        self.title = "ROS Monitor"
+        self.sub_title = f"Version: {self.version}"
         def start_ros():
             try:
                 rclpy.init()

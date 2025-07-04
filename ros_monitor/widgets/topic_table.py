@@ -1,5 +1,5 @@
 from textual.widgets import DataTable
-from logging_config import logger
+from utils.logging_config import logger
 
 class TopicTable(DataTable):
     def __init__(self, *args, **kwargs):
