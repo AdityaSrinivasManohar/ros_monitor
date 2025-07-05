@@ -1,9 +1,10 @@
 from textual.screen import Screen
-from textual.widgets import Static, Button, Footer, Header
+from textual.widgets import Static, Footer, Header
 from textual.binding import Binding
 from textual.containers import Vertical
 from textual.reactive import reactive
-from ros_utils import get_single_message
+from utils.ros_utils import get_single_message
+from utils.logging_config import logger
 
 ECHO_REFRESH_RATE = 1/10  # 10 Hz refresh rate
 
@@ -46,29 +47,40 @@ class TopicEchoScreen(Screen):
 
     async def on_mount(self):
         self.set_interval(ECHO_REFRESH_RATE, self.fetch_msg)
-        await self.fetch_msg()
 
     async def fetch_msg(self):
         if self._stop:
             return
+
         try:
-            type_list = self.ros_monitor.topics_and_types.get(self.topic_name)
-            if type_list:
-                msg_type = self.ros_monitor.type_maps.get(self.topic_name)
-                if msg_type is not None:
-                    node = self.ros_monitor
-                    try:
-                        msg = get_single_message(self.topic_name, msg_type, node=node, timeout_sec=5)
-                        formatted = pretty_print_imu(msg)
-                        self.msg = formatted
-                    except Exception as e:
-                        self.msg = f"Error: {e}"
-                else:
-                    self.msg = "Could not resolve message type for this topic."
-            else:
+            if not self.ros_monitor:
+                self.msg = "ROS monitor is not initialized."
+                logger.error(self.msg)
+                return
+
+            if self.topic_name not in self.ros_monitor.topics_and_types:
                 self.msg = "Topic type not found."
+                logger.error(self.msg)
+                return
+
+            msg_type = self.ros_monitor.type_maps.get(self.topic_name)
+            if msg_type is None:
+                self.msg = "Could not resolve message type for this topic."
+                logger.error(self.msg)
+                return
+
+            try:
+                msg = get_single_message(
+                    self.topic_name, msg_type, node=self.ros_monitor, timeout_sec=5
+                )
+                self.msg = pretty_print_imu(msg)
+            except Exception as e:
+                self.msg = f"Error fetching message: {e}"
+                logger.exception(self.msg)
+
         except Exception as e:
-            self.msg = f"Error: {e}"
+            self.msg = f"Unexpected error: {e}"
+            logger.exception(self.msg)
 
     def watch_msg(self, msg):
         self.echo_widget.update(msg)

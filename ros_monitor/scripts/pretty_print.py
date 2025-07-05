@@ -5,7 +5,7 @@ from sensor_msgs.msg import Imu
 
 # Ensure ros_utils can be imported when running as a script
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ros_utils import get_single_message
+from utils.ros_utils import get_single_message
 
 def pretty_print_imu(msg, indent=0):
     """

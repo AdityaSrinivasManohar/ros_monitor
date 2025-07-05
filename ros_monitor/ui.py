@@ -4,7 +4,7 @@ import threading
 import time
 
 import rclpy
-from ros_utils import Ros2Monitor
+from utils.ros_utils import Ros2Monitor
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.reactive import reactive
