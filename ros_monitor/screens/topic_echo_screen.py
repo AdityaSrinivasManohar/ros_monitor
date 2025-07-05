@@ -7,6 +7,26 @@ from ros_utils import get_single_message
 
 ECHO_REFRESH_RATE = 1/10  # 10 Hz refresh rate
 
+def pretty_print_imu(msg, indent=0):
+    """
+    Recursively pretty print a ROS message and its fields, removing leading underscores.
+    Returns the formatted string.
+    """
+    prefix = " " * indent
+    lines = []
+    if hasattr(msg, "__slots__"):
+        for field in msg.__slots__:
+            value = getattr(msg, field)
+            field_name = field.lstrip('_')
+            if hasattr(value, "__slots__"):
+                lines.append(f"{prefix}{field_name}:")
+                lines.append(pretty_print_imu(value, indent + 2))
+            else:
+                lines.append(f"{prefix}{field_name}: {value}")
+    else:
+        lines.append(f"{prefix}{msg}")
+    return "\n".join(lines)
+
 class TopicEchoScreen(Screen):
     BINDINGS = [Binding("escape", "pop_screen", "Back")]
 
@@ -38,8 +58,9 @@ class TopicEchoScreen(Screen):
                 if msg_type is not None:
                     node = self.ros_monitor
                     try:
-                        msg = get_single_message(self.topic_name, msg_type, node=node, timeout_sec=2)
-                        self.msg = f"Echo for {self.topic_name}:\n{msg}"
+                        msg = get_single_message(self.topic_name, msg_type, node=node, timeout_sec=5)
+                        formatted = pretty_print_imu(msg)
+                        self.msg = formatted
                     except Exception as e:
                         self.msg = f"Error: {e}"
                 else:
