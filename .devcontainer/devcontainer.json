@@ -18,6 +18,6 @@
 	},
 
 	"containerEnv": {
-        "PYTHONPATH": "/workspaces/ros2tui:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages"
+        "PYTHONPATH": "/workspaces/ros_monitor:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages"
     }
 }
