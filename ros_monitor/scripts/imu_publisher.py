@@ -7,10 +7,11 @@ from std_msgs.msg import Header
 import math
 import time
 
+
 class ImuPublisher(Node):
     def __init__(self):
-        super().__init__('imu_publisher')
-        self.publisher_ = self.create_publisher(Imu, 'imu/data', 10)
+        super().__init__("imu_publisher")
+        self.publisher_ = self.create_publisher(Imu, "imu/data", 10)
         self.timer = self.create_timer(0.1, self.publish_imu_msg)  # 10 Hz
 
     def publish_imu_msg(self):
@@ -36,7 +37,8 @@ class ImuPublisher(Node):
         msg.linear_acceleration.z = 0.0
 
         self.publisher_.publish(msg)
-        self.get_logger().info('Publishing IMU data')
+        self.get_logger().info("Publishing IMU data")
+
 
 def main(args=None):
     rclpy.init(args=args)
@@ -49,5 +51,6 @@ def main(args=None):
         node.destroy_node()
         # rclpy.shutdown()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

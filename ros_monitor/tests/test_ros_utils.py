@@ -1,10 +1,12 @@
 """Pytest for ros_utils.py using the imu_publisher node."""
+
 import subprocess
 import sys
 import time
 import rclpy
 import pytest
 from ros_monitor.utils.ros_utils import Ros2Monitor, get_single_message
+
 
 @pytest.fixture(scope="module")
 def imu_publisher_proc():
@@ -13,6 +15,7 @@ def imu_publisher_proc():
     yield proc
     proc.terminate()
     proc.wait()
+
 
 @pytest.fixture(scope="module")
 def ros2_monitor():
@@ -23,6 +26,7 @@ def ros2_monitor():
     monitor.stop()
     monitor.destroy_node()
     rclpy.shutdown()
+
 
 def test_imu_topic_and_message(imu_publisher_proc, ros2_monitor):
     ros2_monitor.print_topics()

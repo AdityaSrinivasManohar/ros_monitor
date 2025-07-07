@@ -13,6 +13,7 @@ from rosidl_runtime_py.utilities import get_message
 
 ROS_MESSAGE = Any
 
+
 class Ros2Monitor(Node):
     def __init__(self):
         super().__init__("ros2monitor")
@@ -49,7 +50,10 @@ class Ros2Monitor(Node):
             # self.get_logger().info(f'Topic: {topic}, Type: {type}')
             print(f"Topic: {topic}, Type: {topic_type}")
 
-def get_single_message(topic: str, topic_type: ROS_MESSAGE, node: Optional[Node] = None, timeout_sec: Optional[float] = None) -> ROS_MESSAGE:
+
+def get_single_message(
+    topic: str, topic_type: ROS_MESSAGE, node: Optional[Node] = None, timeout_sec: Optional[float] = None
+) -> ROS_MESSAGE:
     """Get a single message for this topic.
 
     Useful to grab camera_info, tf_static information once at startup.
@@ -77,6 +81,7 @@ def get_single_message(topic: str, topic_type: ROS_MESSAGE, node: Optional[Node]
 
     return msg
 
+
 def main(args=None):
     rclpy.init(args=args)
     ros2monitor = Ros2Monitor()
@@ -87,7 +92,9 @@ def main(args=None):
             ros2monitor.print_topics()
             time.sleep(1)
             try:
-                print(get_single_message("/chatter", ros2monitor.type_maps.get("/chatter"), timeout_sec=1, node=echo_node))
+                print(
+                    get_single_message("/chatter", ros2monitor.type_maps.get("/chatter"), timeout_sec=1, node=echo_node)
+                )
             except TimeoutError as e:
                 print(f"Timeout while waiting for message: {e}")
 

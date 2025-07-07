@@ -6,7 +6,8 @@ from textual.reactive import reactive
 from utils.ros_utils import get_single_message
 from utils.logging_config import logger
 
-ECHO_REFRESH_RATE = 1/10  # 10 Hz refresh rate
+ECHO_REFRESH_RATE = 1 / 10  # 10 Hz refresh rate
+
 
 def pretty_print_imu(msg, indent=0):
     """
@@ -18,7 +19,7 @@ def pretty_print_imu(msg, indent=0):
     if hasattr(msg, "__slots__"):
         for field in msg.__slots__:
             value = getattr(msg, field)
-            field_name = field.lstrip('_')
+            field_name = field.lstrip("_")
             if hasattr(value, "__slots__"):
                 lines.append(f"{prefix}{field_name}:")
                 lines.append(pretty_print_imu(value, indent + 2))
@@ -27,6 +28,7 @@ def pretty_print_imu(msg, indent=0):
     else:
         lines.append(f"{prefix}{msg}")
     return "\n".join(lines)
+
 
 class TopicEchoScreen(Screen):
     BINDINGS = [Binding("escape", "pop_screen", "Back")]
@@ -70,9 +72,7 @@ class TopicEchoScreen(Screen):
                 return
 
             try:
-                msg = get_single_message(
-                    self.topic_name, msg_type, node=self.ros_monitor, timeout_sec=5
-                )
+                msg = get_single_message(self.topic_name, msg_type, node=self.ros_monitor, timeout_sec=5)
                 self.msg = pretty_print_imu(msg)
             except Exception as e:
                 self.msg = f"Error fetching message: {e}"
