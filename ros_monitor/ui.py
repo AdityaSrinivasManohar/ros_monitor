@@ -78,7 +78,3 @@ class Ros2MonitorApp(App):
                 logger.exception(f"Error during ROS shutdown: {e}")
         logger.info("Exiting application.")
         self.exit()
-
-
-if __name__ == "__main__":
-    Ros2MonitorApp().run()
