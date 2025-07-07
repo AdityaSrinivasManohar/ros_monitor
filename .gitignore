@@ -3,6 +3,7 @@ logs/
 
 # Ignore Python cache files
 **/__pycache__**
+**/.pytest_cache**
 
 # Ignore ruff
 **/.ruff_cache

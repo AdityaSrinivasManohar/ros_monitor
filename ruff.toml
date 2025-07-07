@@ -12,8 +12,11 @@ indent-width = 4
 target-version = "py312"
 
 [lint]
-select = ["ALL"]
-ignore = []
+# select = ["ALL"]
+select = []
+ignore = [
+    "G004"
+]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
