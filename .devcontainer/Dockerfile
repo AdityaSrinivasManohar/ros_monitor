@@ -12,11 +12,11 @@ RUN apt-get update && \
     ros-jazzy-tf2-ros && \
     apt-get clean
 
-WORKDIR /ros2tui
+WORKDIR /ros_monitor
 
-COPY .devcontainer/requirements.txt /ros2tui/requirements.txt
+COPY .devcontainer/requirements.txt /ros_monitor/requirements.txt
 
-RUN cd /ros2tui && \
+RUN cd /ros_monitor && \
     python3 -m venv /venv && \
     /venv/bin/pip install -r requirements.txt
 
