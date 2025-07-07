@@ -21,3 +21,5 @@ RUN cd /ros2tui && \
     /venv/bin/pip install -r requirements.txt
 
 COPY .devcontainer/.bashrc /root/.bashrc
+
+ENV PYTHONPATH=/ros2tui:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages

@@ -1,10 +1,14 @@
 # DEV Guide
 
 ## To run and mount files similarly to devcontainer
-docker run -it -v /Users/adsm/Projects/ros2tui:/workspaces/ros2tui/ ros2tui
+```
+docker run -it -v ~/Projects/ros_monitor:/ros_monitor/ ros_monitor
+```
 
 ## To build
-docker build --platform=linux/amd64 -t ros2tui -f .devcontainer/Dockerfile .
+```
+docker build --platform=linux/amd64 -t ros_monitor -f .devcontainer/Dockerfile .
+```
 
 ## For optimal dev environment
 Use the devcontainer!
@@ -15,7 +19,7 @@ ros2 run demo_nodes_cpp listener
 
 ## Make sure to 
 ```
-export PYTHONPATH=/workspaces/ros2tui:/opt/ros/jazzy/lib/python3.12/site-packages
+export PYTHONPATH=/workspaces/ros_monitor:/opt/ros/jazzy/lib/python3.12/site-packages
 ```
 
 ## Testing

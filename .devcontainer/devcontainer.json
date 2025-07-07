@@ -15,5 +15,9 @@
 				"tamasfe.even-better-toml"
 			]
 		}
-	}
+	},
+
+	"containerEnv": {
+        "PYTHONPATH": "/workspaces/ros2tui:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages"
+    }
 }

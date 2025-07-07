@@ -3,3 +3,4 @@ pyyaml
 numpy
 ruff
 pytest
+lark
