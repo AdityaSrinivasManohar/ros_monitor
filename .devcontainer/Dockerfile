@@ -22,4 +22,4 @@ RUN cd /ros_monitor && \
 
 COPY .devcontainer/.bashrc /root/.bashrc
 
-ENV PYTHONPATH=/ros2tui:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages
+ENV PYTHONPATH=/ros_monitor:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages
