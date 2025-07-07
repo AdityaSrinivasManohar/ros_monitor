@@ -7,3 +7,7 @@ logs/
 
 # Ignore ruff
 **/.ruff_cache
+
+#Ignore egg and dist files
+*.egg
+*.egg-info

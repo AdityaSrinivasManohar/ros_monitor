@@ -1,0 +1,25 @@
+[project]
+name = "ros_monitor"
+version = "0.1.0"
+description = "A TUI for monitoring ROS 2 topics and messages. Inspired by cyber_monitor."
+authors = [
+    { name = "Aditya Srinivas Manohar", email = "adityasrinivasmanohar@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "textual",
+    "pyyaml",
+    "numpy",
+    "ruff",
+    "pytest",
+]
+
+[project.scripts]
+ros_monitor = "ros_monitor.main:main"
+
+[tool.setuptools.packages.find]
+where = ["ros_monitor"]
+
+[tool.pytest.ini_options]
+testpaths = ["ros_monitor/tests"]

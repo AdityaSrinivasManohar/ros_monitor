@@ -2,3 +2,4 @@ textual
 pyyaml
 numpy
 ruff
+pytest
