@@ -28,3 +28,8 @@ pytest
 ruff check
 ruff format
 ```
+
+## To install cli
+```
+pip3 install -e .
+```
