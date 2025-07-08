@@ -4,5 +4,7 @@ ros_monitor is inspired by [cyber_monitor](https://cyber-rt.readthedocs.io/en/la
 ![Demo](images/ros_monitor_demo.gif)
 
 TODO:
-Add todo here
+- [ ] Add more unit tests, use textuals framework
+- [ ] Add command line parsing, maybe you only need to inspect 1 topic or a group of specific topics
+- [ ] Add configs, right now the topics update at 1hz and the echo updates at 10hz
 
