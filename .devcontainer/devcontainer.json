@@ -18,6 +18,12 @@
 	},
 
 	"containerEnv": {
+		"SSH_AUTH_SOCK": "/ssh-agent",
         "PYTHONPATH": "/workspaces/ros_monitor:/opt/ros/jazzy/lib/python3.12/site-packages:/venv/lib/python3.12/site-packages"
-    }
+    },
+
+	"mounts": [
+		"source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.ssh/id_rsa,target=/root/.ssh/id_rsa,type=bind,consistency=cached"
+	]
 }
