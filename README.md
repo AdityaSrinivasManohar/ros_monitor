@@ -1,5 +1,5 @@
 # ROS_MONITOR
-ros_monitor is inspired by [cyber_monitor](https://cyber-rt.readthedocs.io/en/latest/). It is a tui which shows ros topics with their types as well as any messages on the topics. This way one wouldnt have to remember any of the ros cli commands, and have all information in one cli-tool.
+ros_monitor is inspired by cyber_monitor. It provides a text-based user interface (TUI) for visualizing ROS topics, their message types, and live topic data—all in one place. With ros_monitor, you no longer need to memorize ROS CLI commands, making it easy to inspect and interact with your ROS system efficiently from a single, streamlined tool.
 
 ![Demo](images/ros_monitor_demo.gif)
 
