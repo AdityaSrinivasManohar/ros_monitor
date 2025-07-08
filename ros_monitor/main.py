@@ -1,11 +1,10 @@
+"""Entry point for the ROS 2 monitor application."""
+
 from ui import Ros2MonitorApp
 
 
-def main():
-    """
-    Main entry point for the ROS 2 monitor application.
-    Initializes the ROS 2 environment and starts the TUI application.
-    """
+def main() -> None:
+    """Start the ROS 2 monitor application."""
     Ros2MonitorApp().run()
 
 

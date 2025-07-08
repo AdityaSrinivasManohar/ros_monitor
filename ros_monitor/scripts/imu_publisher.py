@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
+"""A ROS2 node that publishes simulated IMU (Inertial Measurement Unit) data at 10 Hz."""
+
+import math
+import time
+from typing import Sequence
 
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Header
-import math
-import time
 
 
 class ImuPublisher(Node):
-    def __init__(self):
+    """A ROS2 node that publishes simulated IMU (Inertial Measurement Unit) data at 10 Hz."""
+
+    def __init__(self) -> None:
+        """Initialize the ImuPublisher node and set up the IMU data publisher and timer."""
         super().__init__("imu_publisher")
         self.publisher_ = self.create_publisher(Imu, "imu/data", 10)
         self.timer = self.create_timer(0.1, self.publish_imu_msg)  # 10 Hz
 
-    def publish_imu_msg(self):
+    def publish_imu_msg(self) -> None:
+        """Publish a simulated IMU message with example orientation, angular velocity, and linear acceleration."""
         msg = Imu()
         msg.header = Header()
         msg.header.stamp = self.get_clock().now().to_msg()
@@ -40,7 +47,15 @@ class ImuPublisher(Node):
         self.get_logger().info("Publishing IMU data")
 
 
-def main(args=None):
+
+
+def main(args: Sequence[str] | None = None) -> None:
+    """Initialize the ROS2 Python client library, start the ImuPublisher node, and handle shutdown.
+
+    Args:
+        args (Optional[Sequence[str]]): Command-line arguments for ROS2 initialization.
+
+    """
     rclpy.init(args=args)
     node = ImuPublisher()
     try:
@@ -49,8 +64,6 @@ def main(args=None):
         pass
     finally:
         node.destroy_node()
-        # rclpy.shutdown()
-
 
 if __name__ == "__main__":
     main()

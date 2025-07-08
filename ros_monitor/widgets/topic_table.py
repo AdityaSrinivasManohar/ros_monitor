@@ -1,9 +1,18 @@
+"""Widget for displaying ROS topics in a table format."""
+
 from textual.widgets import DataTable
 from utils.logging_config import logger
 
 
 class TopicTable(DataTable):
-    def __init__(self, *args, **kwargs):
+    """A DataTable widget for displaying ROS topics and their types.
+
+    This widget manages the addition and removal of topics in a table format,
+    highlights the selected row, and logs cursor movements.
+    """
+
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        """Initialize the TopicTable widget."""
         super().__init__(*args, **kwargs)
         self.add_columns("Topic", "Type")
         self.cursor_type = "row"
@@ -11,7 +20,13 @@ class TopicTable(DataTable):
         self.highlighted_row_key = None
         self.logger = logger
 
-    def update_topics(self, topics):
+    def update_topics(self, topics: list[tuple[str, str]]) -> None:
+        """Update the table with the provided list of topics.
+
+        Args:
+            topics (list of tuple[str, str]): A list of tuples where each tuple contains the topic name and its type.
+
+        """
         new_topic_names = {topic for topic, _ in topics}
         for topic, topic_type in topics:
             if topic not in self.current_topics:
